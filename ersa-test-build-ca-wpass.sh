@@ -2,47 +2,122 @@
 
 #set -x
 
-# shellcheck disable=SC3045
-# (warning): In POSIX sh, read -p is undefined.
-
-
+# exit with error
 die() {
 	echo "FAILED: $1"
 	cd "$start_dir" || echo "FAILED to restore dir: $start_dir"
 	exit 1
 }
 
+# user confirmation
+confirm() {
+	echo "$1"
+	read -r key
+}
+
+# Update result list
+update_result_list() {
+	echo "$1"
+	result_list="$result_list
+$ersa_version | $ossl_version | $alg | $1"
+}
+
 # Run simple CA password test
 run_easyrsa_ut() {
-	begin="=====
-
-BEGIN TEST:
- easyrsa: $1$
- openssl: $EASYRSA_OPENSSL"
-	end="
-END TEST:
- easyrsa: $1
- openssl: $EASYRSA_OPENSSL
-
-====="
-
-	# DISABLE easyrsa options by env vars only
-	export EASYRSA_BATCH=
-	export EASYRSA_SILENT=
-	export EASYRSA_SILENT_SSL=
+	# reset per pass env-vars
+	unset -v EASYRSA_ALGO EASYRSA_CURVE \
+		EASYRSA_BATCH EASYRSA_SILENT EASYRSA_SILENT_SSL
 
 	# Check for automated password support
-	no_auto_pass=
-	"$1" help options | grep -q passin || no_auto_pass=1
+	if "$1" help options | grep -q passin
+	then
+		no_auto_pass=
+	else
+		no_auto_pass=1
+	fi
 
-	# Enable easyrsa options by env vars only
-	export EASYRSA_BATCH=1
-	export EASYRSA_SILENT=1
-	export EASYRSA_SILENT_SSL=1
+	case "$3" in
+		rsa)
+			echo "GOOD algo: $3"
+		;;
+		ec)
+			echo "Test for algo support: $3"
+			if "$1" help options | grep -q -e '--use-algo.*ec'
+			then
+				if "$EASYRSA_OPENSSL" ecparam \
+						-name secp384r1 \
+							1>/dev/null
+				then
+					export EASYRSA_CURVE=secp384r1
+					echo "GOOD algo: $3 = $EASYRSA_CURVE"
+				else
+					die "\
+OpenSSL failed to generate ecparam file for curve 'secp384r1'"
+				fi
+			else
+				update_result_list "easyrsa: '$3' not supported"
 
-	# BEGIN TEST
-	echo "$begin"
-	"$1" init-pki
+				# non-fatal error
+				return 1
+			fi
+		;;
+		ed)
+			echo "Test for algo support: $3"
+			if "$1" help options | grep -q -e '--use-algo.*ed'
+			then
+				#shellcheck disable=SC3037 # In POSIX sh, echo flags are undefined
+				echo -n "OpenSSL: "
+				if "$EASYRSA_OPENSSL" genpkey \
+						-algorithm ed25519 \
+							1>/dev/null
+				then
+					export EASYRSA_CURVE=ed25519
+					echo "GOOD algo: $3 = $EASYRSA_CURVE"
+				else
+					update_result_list "openssl: 'ed25519' not found"
+
+					# non-fatal error
+					return 1
+				fi
+			else
+				update_result_list "easyrsa: $3 not supported"
+
+				# non-fatal error
+				return 1
+			fi
+		;;
+		*)
+			die "wtf?"
+	esac
+
+	export EASYRSA_ALGO="$3"
+
+
+		# allow ignore EasyRSA-3.0.9 and 3.0.7
+		if [ "$ersa_version" = EasyRSA-3.0.9 ] || \
+			[ "$ersa_version" = EasyRSA-3.0.8 ] || \
+			[ "$ersa_version" = EasyRSA-3.0.7 ]
+		then
+			echo "${NL}***** NOTICE: $ersa_version"
+			echo "              $ossl_version"
+			echo "EasyRSA will ask for CA password, due to this bug!"
+			[ "$do_all_test" ] || confirm "Run this test [y/N] ? "
+
+			if [ ! "$key" = y ] && [ -z "$do_all_test" ]; then
+				update_result_list "Skipped.."
+
+				# non-fatal error
+				return 1
+			fi
+		fi
+
+
+	# Enable easyrsa options
+	dash_s=1
+	dash_S=1
+	"$1" -s >/dev/null 2>&1 || dash_s=
+	"$1" -S >/dev/null 2>&1 || dash_S=
+	#unset -v dash_s dash_S
 
 	# check for automated password support
 	if [ "$no_auto_pass" ]; then
@@ -55,35 +130,90 @@ END TEST:
 
 		# Wait for confirmation
 		echo "Please confirm or 'Ctrl-C' to quit: "
-		[ "$do_all_test" ] || read -r -p "Run this test [y/N] ? " key
+		[ "$do_all_test" ] || confirm "Run this test [y/N] ? "
+
 		if [ "$key" = y ] || [ "$do_all_test" ]; then
-			"$1" build-ca || die "build-ca"
+			# BEGIN TEST
+			"$1" --batch ${dash_s:+ -s} ${dash_S:+ -S} \
+					init-pki || die "init-pki"
+			"$1" --batch ${dash_s:+ -s} ${dash_S:+ -S} \
+					build-ca || die "build-ca"
+
+			update_result_list "manual build-ca OK"
 
 			# inspect_CA_key
 			inspect_CA_key 
+
+			# change pass
+			if "$1" set-rsa-pass ca; then
+				update_result_list "manual set-rsa-pass OK"
+
+				# inspect_CA_key
+				inspect_CA_key
+			else
+				update_result_list "manual set-rsa-pass Failed"
+			fi
 		else
-			result_list="$result_list
-$ersa_version | $ossl_version | Skipped.."
+			update_result_list "easyrsa: No --passin"
 		fi
 	else
-		
-		# Wait for confirmation
-		#echo "Please confirm or 'Ctrl-C' to quit: "
-		#read key
+			# BEGIN automated TEST
+			"$1" --batch ${dash_s:+ -s} ${dash_S:+ -S} \
+					init-pki || die "init-pki"
+			"$1" --batch ${dash_s:+ -s} ${dash_S:+ -S} \
+					--passin=pass:"$in_pass" \
+					--passout=pass:"$out_pass" \
+					build-ca || die "build-ca"
 
-		# This check will auto-complete or error out
-		"$1" --passin=pass:easyrsa --passout=pass:easyrsa \
-			build-ca || die "build-ca"
+			update_result_list "auto build-ca OK"
 
 			# inspect_CA_key
-			inspect_CA_key 
+			inspect_CA_key
+
+			# change pass
+			if "$1" --passin=pass:"$in_pass" \
+					--passout=pass:"$new_pass" \
+					--batch ${dash_s:+ -s} ${dash_S:+ -S} \
+					set-rsa-pass ca
+			then
+				update_result_list "auto set-rsa-pass OK"
+
+				# inspect_CA_key
+				inspect_CA_key
+			else
+				update_result_list "auto set-rsa-pass Failed"
+
+				echo "Testing easyrsa for incorrect error exit!"
+				if "$1" --passin=pass:"$in_pass" \
+						--passout=pass:"$new_pass" \
+						--batch ${dash_s:+ -s} ${dash_S:+ -S} \
+						set-rsa-pass ca
+				then
+					update_result_list "Second auto set-rsa-pass OK"
+
+				else
+					update_result_list "Second auto set-rsa-pass Failed"
+
+					if "$EASYRSA_OPENSSL" "$EASYRSA_ALGO" \
+						-noout -passin pass:"$new_pass" \
+						-in "$EASYRSA_PKI"/private/ca.key
+					then
+						update_result_list "OpenSSL passed the CA key OK"
+
+					# inspect_CA_key
+					inspect_CA_key
+
+					else
+						update_result_list "OpenSSL Failed to passed the CA key"
+					fi
+				fi
+			fi
 	fi
 
 	# cleanup
 	[ "$keep_pki" ] || rm -rf "${EASYRSA_PKI:?}"
 
 	# End of this test
-	echo "$end"
 }
 
 # Test the CA
@@ -92,17 +222,13 @@ inspect_CA_key() {
 	if [ -f "$ca_key" ]; then
 		: # ok
 	else
-		result_list="$result_list
-$ersa_version | $ossl_version | Error: Missing CA key"
-
-		echo "CA Key: '$ca_key'"
-		read -r -p "Press enter to continue.." key
-		return
+		#update_result_list "Error: Missing CA key"
+		die "Missing CA Key: '$ca_key'"
 	fi
 
 	key_error=
 	key_cipher=
-	if "$EASYRSA_OPENSSL" asn1parse -in "$ca_key" 1>/dev/null
+	if "$EASYRSA_OPENSSL" asn1parse -in "$ca_key" 1>/dev/null 2>&1
 	then
 		if "$EASYRSA_OPENSSL" asn1parse -in "$ca_key" | \
 				grep -q des-ede3-cbc
@@ -112,7 +238,7 @@ $ersa_version | $ossl_version | Error: Missing CA key"
 			if "$EASYRSA_OPENSSL" asn1parse -in "$ca_key" | \
 					grep -q aes-256-cbc
 			then
-				key_cipher="GOOD aes-256-cbc"
+				key_cipher="GOOD: aes-256-cbc"
 			else
 				key_error="Unknown cipher!"
 			fi
@@ -122,11 +248,28 @@ $ersa_version | $ossl_version | Error: Missing CA key"
 	fi
 
 	if [ "$key_error" ]; then
-		result_list="$result_list
-$ersa_version | $ossl_version | Error: $key_error"
+		update_result_list "ERROR: $key_error"
 	else
-		result_list="$result_list
-$ersa_version | $ossl_version | $key_cipher"
+		update_result_list "$key_cipher"
+	fi
+}
+
+# Change CA pass
+change_CA_pass() {
+	"$ersa_bin" set-pass ca
+}
+
+# verify CA password is correct
+verify_ca_pass() {
+	if "$EASYRSA_OPENSSL" "$EASYRSA_ALGO" \
+		-noout -passin pass:"$new_pass" \
+		-in "$EASYRSA_PKI"/private/ca.key
+	then
+		update_result_list "OpenSSL passed the CA key OK"
+		return
+	else
+		update_result_list "OpenSSL Failed to pass the CA key"
+		return 1
 	fi
 }
 
@@ -143,6 +286,10 @@ find_ossl_d() {
 # Setup
 NL='
 '
+in_pass='pppp'
+out_pass='pppp'
+new_pass='mmmm'
+
 start_dir="$PWD"
 ERSA_ARC_D="${ERSA_ARC_D:-/home/tct/git/easy-rsa}"
 OSSL_ARC_D="${OSSL_ARC_D:-/home/tct/openssl}"
@@ -156,8 +303,7 @@ while [ "$1" ]; do
 		keep)
 			keep_pki=1 ;;
 		*)
-			echo "Unknown option: '$1'"
-			exit 1
+			die "Unknown option: '$1'"
 	esac
 	shift
 done
@@ -183,7 +329,7 @@ ossl_list_sort="$(echo "$ossl_list" | sort -g)"
 
 echo "ersa_list_sort: $ersa_list_sort${NL}"
 echo "ossl_list_sort: $ossl_list_sort${NL}"
-read -r -p "Press enter to continue.." key
+confirm "Press enter to continue.."
 result_list=
 
 # Run test
@@ -200,35 +346,46 @@ for p in $ersa_list_sort; do
 		ossl_version="${q##*/}"
 		pki_name="${ossl_version##*-}"
 		ossl_bin="${q}/apps/openssl"
-		if [ -f "$ossl_bin" ]; then
-			export EASYRSA_OPENSSL="$ossl_bin"
 
-			# allow ignore EasyRSA-3.0.9 and 3.0.7
-			if [ "$ersa_version" = EasyRSA-3.0.9 ] || \
-				[ "$ersa_version" = EasyRSA-3.0.8 ] || \
-				[ "$ersa_version" = EasyRSA-3.0.7 ]
-			then
-				echo "${NL}***** NOTICE: $ersa_version"
-				echo "              $ossl_version"
-				echo "EasyRSA will ask for CA password, due to this bug!"
-				[ "$do_all_test" ] || read -r -p "Run this test [y/N] ? " key
-				if [ ! "$key" = y ] && [ -z "$do_all_test" ]; then
-					result_list="$result_list
-$ersa_version | $ossl_version | Skipped.."
-					continue
-				fi
-			fi
+		[ -f "$ossl_bin" ] || die "missing ossl_bin: $ossl_bin"
+		export EASYRSA_OPENSSL="$ossl_bin"
 
+		# Chuck in algo for good measure
+		#for alg in rsa ec ed; do
+		alg=rsa
+
+			begin="=====
+
+BEGIN TEST:
+    algo: $alg
+ easyrsa: $ersa_bin
+ openssl: $EASYRSA_OPENSSL${NL}"
+
+	end="
+END TEST:
+    algo: $alg
+ easyrsa: $ersa_bin
+ openssl: $EASYRSA_OPENSSL
+
+====="
 			# Use a custom test PKI
-			export EASYRSA_PKI="${ersa_dir}/ossl-${pki_name}"
-			run_easyrsa_ut "$ersa_bin" "$ossl_bin"
-		else
-			echo "missing ossl_bin: $ossl_bin"
-			#read key
-		fi
-	done
+			export EASYRSA_PKI="${ersa_dir}/ossl-${pki_name}-$alg"
+
+			# run test
+			echo "$begin"
+			if run_easyrsa_ut "$ersa_bin" "$ossl_bin" "$alg"
+			then
+				echo "Successfully completed."
+			else
+				echo "Test abandoned!"
+			fi
+			result_list="$result_list${NL}"
+
+			echo "$end"
+		#done # alg
+	done # ssl
 		result_list="$result_list${NL}"
-done
+done # ersa
 
 # shellcheck disable=SC2181 # (style): Check exit code directly
 [ $? = 0 ] || echo "Unexpected error occured!"
@@ -237,4 +394,3 @@ echo "Result:"
 echo "$result_list"
 
 echo "${NL}==[ Complete ]=="
-

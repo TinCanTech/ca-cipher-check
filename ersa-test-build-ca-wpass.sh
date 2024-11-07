@@ -352,25 +352,26 @@ for p in $ersa_list_sort; do
 
 		# Chuck in algo for good measure
 		#for alg in rsa ec ed; do
-		alg=rsa
+			alg=rsa
+
+			# Use a custom test PKI
+			export EASYRSA_PKI="${ersa_dir}/ossl-${pki_name}-$alg"
 
 			begin="=====
 
 BEGIN TEST:
     algo: $alg
  easyrsa: $ersa_bin
- openssl: $EASYRSA_OPENSSL${NL}"
+ openssl: $EASYRSA_OPENSSL
+     pki: $EASYRSA_PKI${NL}"
 
-	end="
+			end="
 END TEST:
     algo: $alg
  easyrsa: $ersa_bin
  openssl: $EASYRSA_OPENSSL
 
 ====="
-			# Use a custom test PKI
-			export EASYRSA_PKI="${ersa_dir}/ossl-${pki_name}-$alg"
-
 			# run test
 			echo "$begin"
 			if run_easyrsa_ut "$ersa_bin" "$ossl_bin" "$alg"

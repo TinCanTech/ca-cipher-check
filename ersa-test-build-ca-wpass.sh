@@ -277,6 +277,32 @@ find_ossl_d() {
 	find "$OSSL_ARC_D" -maxdepth 1 -name "*openssl*"
 }
 
+# Intro message
+confirm "\
+Welcome!
+
+In order to use this script you will need two archives:
+* All the versions of Easy-RSA that you want to test.
+  Default directory: ./ | Search term: EasyRSA-*
+* All the versions of OpenSSL that you want to test.
+  Default directory: ./ | Search term: openssl-*
+You can only define the directory not the search term.
+
+To define a different location for these archives,
+'export' the variables 'ERSA_ARC_D' and 'OSSL_ARC_D',
+to point to the Easy-RSA archive and OpenSSl archive,
+respectively.
+
+To force all tests to be executed use option 'all'.
+This will force some user interaction for passwords.
+ALWAYS use password 'pppp' for user interaction.
+
+Use option 'keep' to keep all the created PKIs, for
+further inspection.
+
+Press [enter] to continue.
+"
+
 # Setup
 NL='
 '
@@ -289,10 +315,10 @@ result_list=
 start_dir="$PWD"
 
 # EasyRSA archive
-ERSA_ARC_D="${ERSA_ARC_D:-/home/tct/git/easy-rsa}"
+ERSA_ARC_D="${ERSA_ARC_D:-./}"
 [ -d "$ERSA_ARC_D" ] || die "Missing ERSA_ARC_D: '$ERSA_ARC_D'"
 #openssl archive
-OSSL_ARC_D="${OSSL_ARC_D:-/home/tct/openssl}"
+OSSL_ARC_D="${OSSL_ARC_D:-./}"
 [ -d "$OSSL_ARC_D" ] || die "Missing OSSL_ARC_D: '$OSSL_ARC_D'"
 
 # Options
@@ -304,6 +330,10 @@ while [ "$1" ]; do
 			do_all_test=1 ;;
 		keep)
 			keep_pki=1 ;;
+		tct)
+			ERSA_ARC_D=/home/tct/git/easy-rsa
+			OSSL_ARC_D=/home/tct/openssl
+		;;
 		*)
 			die "Unknown option: '$1'"
 	esac

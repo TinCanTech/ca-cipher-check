@@ -311,15 +311,10 @@ out_pass='pppp'
 new_pass='mmmm'
 result_list=
 
-# TODO: remove $start_dir
+# Run in the git-clone directory
 start_dir="$PWD"
-
-# EasyRSA archive
-ERSA_ARC_D="${ERSA_ARC_D:-./}"
-[ -d "$ERSA_ARC_D" ] || die "Missing ERSA_ARC_D: '$ERSA_ARC_D'"
-#openssl archive
-OSSL_ARC_D="${OSSL_ARC_D:-./}"
-[ -d "$OSSL_ARC_D" ] || die "Missing OSSL_ARC_D: '$OSSL_ARC_D'"
+in_dir="$start_dir"/data
+out_dir="$start_dir"/data
 
 # Options
 do_all_test=
@@ -339,6 +334,13 @@ while [ "$1" ]; do
 	esac
 	shift
 done
+
+# EasyRSA archive
+ERSA_ARC_D=${ERSA_ARC_D:-"$in_dir"}
+[ -d "$ERSA_ARC_D" ] || die "Missing ERSA_ARC_D: '$ERSA_ARC_D'"
+#openssl archive
+OSSL_ARC_D="${OSSL_ARC_D:-./}"
+[ -d "$OSSL_ARC_D" ] || die "Missing OSSL_ARC_D: '$OSSL_ARC_D'"
 
 # Find EasyRSA archives
 for i in $(find_ersa_d); do
@@ -361,24 +363,25 @@ echo "ossl_list_sort: $ossl_list_sort${NL}"
 confirm "Press enter to continue.."
 
 # Run test
-# EasyRSA sources
-for p in $ersa_list_sort; do
-	[ "$p" = "$ERSA_ARC_D" ] && continue
-	ersa_version="${p##*/}"
-	cd "$p" || die "cd $p"
-	ersa_dir="$p"
-	ersa_bin="$p"/easyrsa
-	[ -f "$ersa_bin" ] || die "missing ersa_bin: $ersa_bin"
 
-	# openssl sources
-	for q in $ossl_list_sort; do
-		[ "$q" = "$OSSL_ARC_D" ] && continue
-		ossl_version="${q##*/}"
-		pki_name="${ossl_version##*-}"
-		ossl_bin="${q}/apps/openssl"
+# openssl sources
+for q in $ossl_list_sort; do
+	[ "$q" = "$OSSL_ARC_D" ] && continue
+	ossl_version="${q##*/}"
+	pki_name="${ossl_version##*-}"
+	ossl_bin="${q}/apps/openssl"
 
-		[ -f "$ossl_bin" ] || die "missing ossl_bin: $ossl_bin"
-		export EASYRSA_OPENSSL="$ossl_bin"
+	[ -f "$ossl_bin" ] || die "missing ossl_bin: $ossl_bin"
+	export EASYRSA_OPENSSL="$ossl_bin"
+
+	# EasyRSA sources
+	for p in $ersa_list_sort; do
+		[ "$p" = "$ERSA_ARC_D" ] && continue
+		ersa_version="${p##*/}"
+		cd "$p" || die "cd $p"
+		ersa_dir="$p"
+		ersa_bin="$p"/easyrsa
+		[ -f "$ersa_bin" ] || die "missing ersa_bin: $ersa_bin"
 
 		# Chuck in algo for good measure
 		#for alg in rsa ec ed; do

@@ -1,0 +1,328 @@
+=====
+Result:   By Easy-RSA
+
+EasyRSA-3.0.5 | openssl-1.1.0l | rsa | manual build-ca OK
+EasyRSA-3.0.5 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+EasyRSA-3.0.5 | openssl-1.1.0l | rsa | manual set-rsa-pass OK
+EasyRSA-3.0.5 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.0.5 | openssl-1.1.1w | rsa | manual build-ca OK
+EasyRSA-3.0.5 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+EasyRSA-3.0.5 | openssl-1.1.1w | rsa | manual set-rsa-pass OK
+EasyRSA-3.0.5 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.0.5 | openssl-3.3.2 | rsa | manual build-ca OK
+EasyRSA-3.0.5 | openssl-3.3.2 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.0.5 | openssl-3.3.2 | rsa | manual set-rsa-pass OK
+EasyRSA-3.0.5 | openssl-3.3.2 | rsa | 1886 | GOOD: aes-256-cbc
+
+EasyRSA-3.0.5 | openssl-3.4.0 | rsa | manual build-ca OK
+EasyRSA-3.0.5 | openssl-3.4.0 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.0.5 | openssl-3.4.0 | rsa | manual set-rsa-pass OK
+EasyRSA-3.0.5 | openssl-3.4.0 | rsa | 1886 | GOOD: aes-256-cbc
+
+
+EasyRSA-3.0.6 | openssl-1.1.0l | rsa | manual build-ca OK
+EasyRSA-3.0.6 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+EasyRSA-3.0.6 | openssl-1.1.0l | rsa | manual set-rsa-pass OK
+EasyRSA-3.0.6 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.0.6 | openssl-1.1.1w | rsa | manual build-ca OK
+EasyRSA-3.0.6 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+EasyRSA-3.0.6 | openssl-1.1.1w | rsa | manual set-rsa-pass OK
+EasyRSA-3.0.6 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.0.6 | openssl-3.3.2 | rsa | manual build-ca OK
+EasyRSA-3.0.6 | openssl-3.3.2 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.0.6 | openssl-3.3.2 | rsa | manual set-rsa-pass OK
+EasyRSA-3.0.6 | openssl-3.3.2 | rsa | 1886 | GOOD: aes-256-cbc
+
+EasyRSA-3.0.6 | openssl-3.4.0 | rsa | manual build-ca OK
+EasyRSA-3.0.6 | openssl-3.4.0 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.0.6 | openssl-3.4.0 | rsa | manual set-rsa-pass OK
+EasyRSA-3.0.6 | openssl-3.4.0 | rsa | 1886 | GOOD: aes-256-cbc
+
+
+EasyRSA-3.0.7 | openssl-1.1.0l | rsa | auto build-ca OK
+EasyRSA-3.0.7 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+EasyRSA-3.0.7 | openssl-1.1.0l | rsa | auto set-rsa-pass Failed
+EasyRSA-3.0.7 | openssl-1.1.0l | rsa | Second auto set-rsa-pass Failed
+EasyRSA-3.0.7 | openssl-1.1.0l | rsa | OpenSSL passed the CA key OK
+EasyRSA-3.0.7 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.0.7 | openssl-1.1.1w | rsa | auto build-ca OK
+EasyRSA-3.0.7 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+EasyRSA-3.0.7 | openssl-1.1.1w | rsa | auto set-rsa-pass Failed
+EasyRSA-3.0.7 | openssl-1.1.1w | rsa | Second auto set-rsa-pass Failed
+EasyRSA-3.0.7 | openssl-1.1.1w | rsa | OpenSSL passed the CA key OK
+EasyRSA-3.0.7 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.0.7 | openssl-3.3.2 | rsa | auto build-ca OK
+EasyRSA-3.0.7 | openssl-3.3.2 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.0.7 | openssl-3.3.2 | rsa | auto set-rsa-pass Failed
+EasyRSA-3.0.7 | openssl-3.3.2 | rsa | Second auto set-rsa-pass Failed
+EasyRSA-3.0.7 | openssl-3.3.2 | rsa | OpenSSL passed the CA key OK
+EasyRSA-3.0.7 | openssl-3.3.2 | rsa | 1886 | GOOD: aes-256-cbc
+
+EasyRSA-3.0.7 | openssl-3.4.0 | rsa | auto build-ca OK
+EasyRSA-3.0.7 | openssl-3.4.0 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.0.7 | openssl-3.4.0 | rsa | auto set-rsa-pass Failed
+EasyRSA-3.0.7 | openssl-3.4.0 | rsa | Second auto set-rsa-pass Failed
+EasyRSA-3.0.7 | openssl-3.4.0 | rsa | OpenSSL passed the CA key OK
+EasyRSA-3.0.7 | openssl-3.4.0 | rsa | 1886 | GOOD: aes-256-cbc
+
+
+EasyRSA-3.0.8 | openssl-1.1.0l | rsa | auto build-ca OK
+EasyRSA-3.0.8 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+EasyRSA-3.0.8 | openssl-1.1.0l | rsa | auto set-rsa-pass OK
+EasyRSA-3.0.8 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.0.8 | openssl-1.1.1w | rsa | auto build-ca OK
+EasyRSA-3.0.8 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+EasyRSA-3.0.8 | openssl-1.1.1w | rsa | auto set-rsa-pass OK
+EasyRSA-3.0.8 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.0.8 | openssl-3.3.2 | rsa | auto build-ca OK
+EasyRSA-3.0.8 | openssl-3.3.2 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.0.8 | openssl-3.3.2 | rsa | auto set-rsa-pass OK
+EasyRSA-3.0.8 | openssl-3.3.2 | rsa | 1886 | GOOD: aes-256-cbc
+
+EasyRSA-3.0.8 | openssl-3.4.0 | rsa | auto build-ca OK
+EasyRSA-3.0.8 | openssl-3.4.0 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.0.8 | openssl-3.4.0 | rsa | auto set-rsa-pass OK
+EasyRSA-3.0.8 | openssl-3.4.0 | rsa | 1886 | GOOD: aes-256-cbc
+
+
+EasyRSA-3.0.9 | openssl-1.1.0l | rsa | auto build-ca OK
+EasyRSA-3.0.9 | openssl-1.1.0l | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.0.9 | openssl-1.1.0l | rsa | auto set-rsa-pass OK
+EasyRSA-3.0.9 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.0.9 | openssl-1.1.1w | rsa | auto build-ca OK
+EasyRSA-3.0.9 | openssl-1.1.1w | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.0.9 | openssl-1.1.1w | rsa | auto set-rsa-pass OK
+EasyRSA-3.0.9 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.0.9 | openssl-3.3.2 | rsa | auto build-ca OK
+EasyRSA-3.0.9 | openssl-3.3.2 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.0.9 | openssl-3.3.2 | rsa | auto set-rsa-pass OK
+EasyRSA-3.0.9 | openssl-3.3.2 | rsa | 1886 | GOOD: aes-256-cbc
+
+EasyRSA-3.0.9 | openssl-3.4.0 | rsa | auto build-ca OK
+EasyRSA-3.0.9 | openssl-3.4.0 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.0.9 | openssl-3.4.0 | rsa | auto set-rsa-pass OK
+EasyRSA-3.0.9 | openssl-3.4.0 | rsa | 1886 | GOOD: aes-256-cbc
+
+
+EasyRSA-3.1.0 | openssl-1.1.0l | rsa | auto build-ca OK
+EasyRSA-3.1.0 | openssl-1.1.0l | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.1.0 | openssl-1.1.0l | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.0 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.1.0 | openssl-1.1.1w | rsa | auto build-ca OK
+EasyRSA-3.1.0 | openssl-1.1.1w | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.1.0 | openssl-1.1.1w | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.0 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.1.0 | openssl-3.3.2 | rsa | auto build-ca OK
+EasyRSA-3.1.0 | openssl-3.3.2 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.1.0 | openssl-3.3.2 | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.0 | openssl-3.3.2 | rsa | 1886 | GOOD: aes-256-cbc
+
+EasyRSA-3.1.0 | openssl-3.4.0 | rsa | auto build-ca OK
+EasyRSA-3.1.0 | openssl-3.4.0 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.1.0 | openssl-3.4.0 | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.0 | openssl-3.4.0 | rsa | 1886 | GOOD: aes-256-cbc
+
+
+EasyRSA-3.1.1 | openssl-1.1.0l | rsa | auto build-ca OK
+EasyRSA-3.1.1 | openssl-1.1.0l | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.1.1 | openssl-1.1.0l | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.1 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.1.1 | openssl-1.1.1w | rsa | auto build-ca OK
+EasyRSA-3.1.1 | openssl-1.1.1w | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.1.1 | openssl-1.1.1w | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.1 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.1.1 | openssl-3.3.2 | rsa | auto build-ca OK
+EasyRSA-3.1.1 | openssl-3.3.2 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.1.1 | openssl-3.3.2 | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.1 | openssl-3.3.2 | rsa | 1886 | GOOD: aes-256-cbc
+
+EasyRSA-3.1.1 | openssl-3.4.0 | rsa | auto build-ca OK
+EasyRSA-3.1.1 | openssl-3.4.0 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.1.1 | openssl-3.4.0 | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.1 | openssl-3.4.0 | rsa | 1886 | GOOD: aes-256-cbc
+
+
+EasyRSA-3.1.2 | openssl-1.1.0l | rsa | auto build-ca OK
+EasyRSA-3.1.2 | openssl-1.1.0l | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.1.2 | openssl-1.1.0l | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.2 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.1.2 | openssl-1.1.1w | rsa | auto build-ca OK
+EasyRSA-3.1.2 | openssl-1.1.1w | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.1.2 | openssl-1.1.1w | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.2 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.1.2 | openssl-3.3.2 | rsa | auto build-ca OK
+EasyRSA-3.1.2 | openssl-3.3.2 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.1.2 | openssl-3.3.2 | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.2 | openssl-3.3.2 | rsa | 1886 | GOOD: aes-256-cbc
+
+EasyRSA-3.1.2 | openssl-3.4.0 | rsa | auto build-ca OK
+EasyRSA-3.1.2 | openssl-3.4.0 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.1.2 | openssl-3.4.0 | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.2 | openssl-3.4.0 | rsa | 1886 | GOOD: aes-256-cbc
+
+
+EasyRSA-3.1.3 | openssl-1.1.0l | rsa | auto build-ca OK
+EasyRSA-3.1.3 | openssl-1.1.0l | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.1.3 | openssl-1.1.0l | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.3 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.1.3 | openssl-1.1.1w | rsa | auto build-ca OK
+EasyRSA-3.1.3 | openssl-1.1.1w | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.1.3 | openssl-1.1.1w | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.3 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.1.3 | openssl-3.3.2 | rsa | auto build-ca OK
+EasyRSA-3.1.3 | openssl-3.3.2 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.1.3 | openssl-3.3.2 | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.3 | openssl-3.3.2 | rsa | 1886 | GOOD: aes-256-cbc
+
+EasyRSA-3.1.3 | openssl-3.4.0 | rsa | auto build-ca OK
+EasyRSA-3.1.3 | openssl-3.4.0 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.1.3 | openssl-3.4.0 | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.3 | openssl-3.4.0 | rsa | 1886 | GOOD: aes-256-cbc
+
+
+EasyRSA-3.1.4 | openssl-1.1.0l | rsa | auto build-ca OK
+EasyRSA-3.1.4 | openssl-1.1.0l | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.1.4 | openssl-1.1.0l | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.4 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.1.4 | openssl-1.1.1w | rsa | auto build-ca OK
+EasyRSA-3.1.4 | openssl-1.1.1w | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.1.4 | openssl-1.1.1w | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.4 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.1.4 | openssl-3.3.2 | rsa | auto build-ca OK
+EasyRSA-3.1.4 | openssl-3.3.2 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.1.4 | openssl-3.3.2 | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.4 | openssl-3.3.2 | rsa | 1886 | GOOD: aes-256-cbc
+
+EasyRSA-3.1.4 | openssl-3.4.0 | rsa | auto build-ca OK
+EasyRSA-3.1.4 | openssl-3.4.0 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.1.4 | openssl-3.4.0 | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.4 | openssl-3.4.0 | rsa | 1886 | GOOD: aes-256-cbc
+
+
+EasyRSA-3.1.5 | openssl-1.1.0l | rsa | auto build-ca OK
+EasyRSA-3.1.5 | openssl-1.1.0l | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.1.5 | openssl-1.1.0l | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.5 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.1.5 | openssl-1.1.1w | rsa | auto build-ca OK
+EasyRSA-3.1.5 | openssl-1.1.1w | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.1.5 | openssl-1.1.1w | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.5 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.1.5 | openssl-3.3.2 | rsa | auto build-ca OK
+EasyRSA-3.1.5 | openssl-3.3.2 | rsa | 1854 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.1.5 | openssl-3.3.2 | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.5 | openssl-3.3.2 | rsa | 1866 | GOOD: aes-256-cbc
+
+EasyRSA-3.1.5 | openssl-3.4.0 | rsa | auto build-ca OK
+EasyRSA-3.1.5 | openssl-3.4.0 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.1.5 | openssl-3.4.0 | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.5 | openssl-3.4.0 | rsa | 1886 | GOOD: aes-256-cbc
+
+
+EasyRSA-3.1.6 | openssl-1.1.0l | rsa | auto build-ca OK
+EasyRSA-3.1.6 | openssl-1.1.0l | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.1.6 | openssl-1.1.0l | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.6 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.1.6 | openssl-1.1.1w | rsa | auto build-ca OK
+EasyRSA-3.1.6 | openssl-1.1.1w | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.1.6 | openssl-1.1.1w | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.6 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.1.6 | openssl-3.3.2 | rsa | auto build-ca OK
+EasyRSA-3.1.6 | openssl-3.3.2 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.1.6 | openssl-3.3.2 | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.6 | openssl-3.3.2 | rsa | 1886 | GOOD: aes-256-cbc
+
+EasyRSA-3.1.6 | openssl-3.4.0 | rsa | auto build-ca OK
+EasyRSA-3.1.6 | openssl-3.4.0 | rsa | 1854 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.1.6 | openssl-3.4.0 | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.6 | openssl-3.4.0 | rsa | 1866 | GOOD: aes-256-cbc
+
+
+EasyRSA-3.1.7 | openssl-1.1.0l | rsa | auto build-ca OK
+EasyRSA-3.1.7 | openssl-1.1.0l | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.1.7 | openssl-1.1.0l | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.7 | openssl-1.1.0l | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.1.7 | openssl-1.1.1w | rsa | auto build-ca OK
+EasyRSA-3.1.7 | openssl-1.1.1w | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.1.7 | openssl-1.1.1w | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.7 | openssl-1.1.1w | rsa | 1766 | ERROR: Failed asn1parse
+
+EasyRSA-3.1.7 | openssl-3.3.2 | rsa | auto build-ca OK
+EasyRSA-3.1.7 | openssl-3.3.2 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.1.7 | openssl-3.3.2 | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.7 | openssl-3.3.2 | rsa | 1886 | GOOD: aes-256-cbc
+
+EasyRSA-3.1.7 | openssl-3.4.0 | rsa | auto build-ca OK
+EasyRSA-3.1.7 | openssl-3.4.0 | rsa | 1862 | ERROR: Cipher: des-ede3-cbc
+EasyRSA-3.1.7 | openssl-3.4.0 | rsa | auto set-rsa-pass OK
+EasyRSA-3.1.7 | openssl-3.4.0 | rsa | 1886 | GOOD: aes-256-cbc
+
+
+EasyRSA-3.2.0 | openssl-1.1.0l | rsa | auto build-ca OK
+EasyRSA-3.2.0 | openssl-1.1.0l | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.2.0 | openssl-1.1.0l | rsa | auto set-rsa-pass OK
+EasyRSA-3.2.0 | openssl-1.1.0l | rsa | 1874 | GOOD: aes-256-cbc
+
+EasyRSA-3.2.0 | openssl-1.1.1w | rsa | auto build-ca OK
+EasyRSA-3.2.0 | openssl-1.1.1w | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.2.0 | openssl-1.1.1w | rsa | auto set-rsa-pass OK
+EasyRSA-3.2.0 | openssl-1.1.1w | rsa | 1874 | GOOD: aes-256-cbc
+
+EasyRSA-3.2.0 | openssl-3.3.2 | rsa | auto build-ca OK
+EasyRSA-3.2.0 | openssl-3.3.2 | rsa | 1886 | GOOD: aes-256-cbc
+EasyRSA-3.2.0 | openssl-3.3.2 | rsa | auto set-rsa-pass OK
+EasyRSA-3.2.0 | openssl-3.3.2 | rsa | 1886 | GOOD: aes-256-cbc
+
+EasyRSA-3.2.0 | openssl-3.4.0 | rsa | auto build-ca OK
+EasyRSA-3.2.0 | openssl-3.4.0 | rsa | 1886 | GOOD: aes-256-cbc
+EasyRSA-3.2.0 | openssl-3.4.0 | rsa | auto set-rsa-pass OK
+EasyRSA-3.2.0 | openssl-3.4.0 | rsa | 1886 | GOOD: aes-256-cbc
+
+
+EasyRSA-3.2.1 | openssl-1.1.0l | rsa | auto build-ca OK
+EasyRSA-3.2.1 | openssl-1.1.0l | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.2.1 | openssl-1.1.0l | rsa | auto set-rsa-pass OK
+EasyRSA-3.2.1 | openssl-1.1.0l | rsa | 1874 | GOOD: aes-256-cbc
+
+EasyRSA-3.2.1 | openssl-1.1.1w | rsa | auto build-ca OK
+EasyRSA-3.2.1 | openssl-1.1.1w | rsa | 1874 | GOOD: aes-256-cbc
+EasyRSA-3.2.1 | openssl-1.1.1w | rsa | auto set-rsa-pass OK
+EasyRSA-3.2.1 | openssl-1.1.1w | rsa | 1874 | GOOD: aes-256-cbc
+
+EasyRSA-3.2.1 | openssl-3.3.2 | rsa | auto build-ca OK
+EasyRSA-3.2.1 | openssl-3.3.2 | rsa | 1886 | GOOD: aes-256-cbc
+EasyRSA-3.2.1 | openssl-3.3.2 | rsa | auto set-rsa-pass OK
+EasyRSA-3.2.1 | openssl-3.3.2 | rsa | 1886 | GOOD: aes-256-cbc
+
+EasyRSA-3.2.1 | openssl-3.4.0 | rsa | auto build-ca OK
+EasyRSA-3.2.1 | openssl-3.4.0 | rsa | 1886 | GOOD: aes-256-cbc
+EasyRSA-3.2.1 | openssl-3.4.0 | rsa | auto set-rsa-pass OK
+EasyRSA-3.2.1 | openssl-3.4.0 | rsa | 1886 | GOOD: aes-256-cbc
+
+
+
+==[ Complete ]==

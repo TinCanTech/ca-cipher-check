@@ -225,6 +225,9 @@ inspect_CA_key() {
 		die "Missing CA Key: '$ca_key'"
 	fi
 
+	# file size
+	key_file_size_b="$(stat -c%s "$ca_key")"
+
 	key_error=
 	key_cipher=
 	if "$EASYRSA_OPENSSL" asn1parse -in "$ca_key" 1>/dev/null 2>&1
@@ -247,9 +250,9 @@ inspect_CA_key() {
 	fi
 
 	if [ "$key_error" ]; then
-		update_result_list "ERROR: $key_error"
+		update_result_list "$key_file_size_b | ERROR: $key_error"
 	else
-		update_result_list "$key_cipher"
+		update_result_list "$key_file_size_b | $key_cipher"
 	fi
 }
 
